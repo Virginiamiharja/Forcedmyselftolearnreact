@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "pompom",
+      "fullName": "Pom Pom the Cat",
+      "password": "pompom",
+      "role": "Cat"
+    },
+    {
+      "username": "nuggetthecat",
+      "fullName": "Nugget the Cat",
+      "password": "12345",
+      "role": "Cat",
+      "id": 2
+    },
+    {
+      "username": "kingsimba",
+      "fullName": "Simba Son of Mufasa",
+      "password": "12345",
+      "role": "Lion",
+      "id": 3
+    }
+  ]
+}
