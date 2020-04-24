@@ -11,6 +11,14 @@ import Navbar from "./views/component/Navbar";
 import RegistrationScreen from "./views/screen/RegistrationScreen";
 import HomeScreen from "./views/screen/HomeScreen";
 import LoginScreen from "./views/screen/LoginScreen";
+import ProfileScreen from "./views/screen/ProfileScreen";
+
+// Urutan package yang harus diinstall
+// Router => npm install react-router-dom => Ini buat routing
+// Json Server => npm install -g json-server => Buat nyimpen data sementara
+// Axios => npm install axios => Untuk manipulasi json server
+// Redux => npm install reactstrap redux react-redux redux-thunk => Untuk global state and functions
+// Cookie => npm install universal-cookie => Untuk nyimpen data di client server
 
 function App() {
   return (
@@ -21,6 +29,8 @@ function App() {
         <Route exact path="/hallo/:user" component={HomeScreen} />
         <Route exact path="/registration" component={RegistrationScreen} />
         <Route exact path="/login" component={LoginScreen} />
+        {/* Ini namanya route param */}
+        <Route exact path="/profile/:username" component={ProfileScreen} />
       </Switch>
     </div>
   );

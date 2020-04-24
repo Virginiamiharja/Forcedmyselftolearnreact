@@ -20,6 +20,13 @@
       "password": "12345",
       "role": "Lion",
       "id": 3
+    },
+    {
+      "username": "virginiamiharja",
+      "fullName": "Virginia Miharja",
+      "password": "12345",
+      "role": "Human",
+      "id": 4
     }
   ]
 }
