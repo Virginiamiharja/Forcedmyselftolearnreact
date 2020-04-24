@@ -6,40 +6,37 @@ import { Redirect } from "react-router-dom";
 // Import fungsi dari index.js di redux/action
 import { loginHandler } from "../../redux/actions/";
 import { connect } from "react-redux";
+import Cookie from "universal-cookie";
+
+const cookieObject = new Cookie();
 
 class LoginScreen extends React.Component {
   state = {
     username: "",
-    password: "",
-    isLoggedIn: false
+    password: ""
   };
 
   loginHandler = () => {
     const { username, password } = this.state;
-    Axios.get(`${API_URL}/users`, {
-      params: {
-        username,
-        password
-      }
-    })
-      .then(res => {
-        console.log(res);
-        if (res.data.length > 0) {
-          swal("Congrats", "You are logged in", "success");
-          this.setState({ isLoggedIn: true });
-          this.props.onLogin();
-        } else {
-          swal("Oops", "Wrong username and password", "error");
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    let userLogin = {
+      username,
+      password
+    };
+    this.props.onLogin(userLogin);
   };
 
+  componentDidUpdate() {
+    // Kalo misalnya ada id berarti dia akan execute function
+    if (this.props.user.id) {
+      // Kita set cookie dengan nama auth data trs kita ambil apa yang mau kita simpan yaitu si user kan
+      // Tapi dia nerima hanya string jd kita parsing gitu dari object jadi string
+      cookieObject.set("authData", JSON.stringify(this.props.user));
+    }
+  }
+
   render() {
-    const { username, password, isLoggedIn } = this.state;
-    if (!isLoggedIn) {
+    const { username, password } = this.state;
+    if (!this.props.user.isLoggedIn) {
       return (
         <div className="d-flex flex-column justify-content-center align-items-center">
           <h4 className="mt-5"> Login Form </h4>

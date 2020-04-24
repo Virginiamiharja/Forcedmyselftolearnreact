@@ -27,6 +27,20 @@
       "password": "12345",
       "role": "Human",
       "id": 4
+    },
+    {
+      "username": "edward",
+      "fullName": "Edward The Cat",
+      "password": "12345",
+      "role": "Cat",
+      "id": 5
+    },
+    {
+      "username": "mufasathelion",
+      "fullName": "Mufasa Father of Simba",
+      "password": "mufasa",
+      "role": "Lion",
+      "id": 6
     }
   ]
 }

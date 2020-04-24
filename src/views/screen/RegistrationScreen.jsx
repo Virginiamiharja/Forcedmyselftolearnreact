@@ -2,6 +2,9 @@ import React from "react";
 import Axios from "axios";
 import { API_URL } from "../../constants/API";
 import swal from "sweetalert";
+import { registerHandler } from "../../redux/actions/";
+import { connect } from "react-redux";
+import { Redirect } from "react";
 
 class RegistrationScreen extends React.Component {
   state = {
@@ -19,42 +22,14 @@ class RegistrationScreen extends React.Component {
 
   registrationHandler = () => {
     const { username, fullName, password, rptPassword, role } = this.state;
-    Axios.get(`${API_URL}/users`, {
-      params: {
-        username
-      }
-    })
-      .then(res => {
-        if (res.data.length > 0) {
-          swal("Oops !", "That username has been registered", "error");
-        } else if (password != rptPassword) {
-          swal("Oops !", "Password does not match", "error");
-        } else {
-          swal("Welcome !", "Thank you for your registration", "success");
-          this.setState({
-            username: "",
-            fullName: "",
-            password: "",
-            rptPassword: "",
-            role: ""
-          });
-          Axios.post(`${API_URL}/users`, {
-            username,
-            fullName,
-            password,
-            role
-          })
-            .then(res => {
-              console.log(res);
-            })
-            .catch(err => {
-              console.log(err);
-            });
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    let userRegister = {
+      username,
+      fullName,
+      password,
+      rptPassword,
+      role
+    };
+    this.props.onRegister(userRegister);
   };
 
   render() {
@@ -122,4 +97,14 @@ class RegistrationScreen extends React.Component {
   }
 }
 
-export default RegistrationScreen;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = {
+  onRegister: registerHandler
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationScreen);

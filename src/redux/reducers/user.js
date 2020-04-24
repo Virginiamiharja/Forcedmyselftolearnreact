@@ -1,17 +1,40 @@
 const init_state = {
   id: "",
-  username: "Hallo",
+  username: "",
   fullName: "",
   password: "",
   role: "",
-  isLoggedIn: false
+  isLoggedIn: false,
+  errMsg: ""
 };
 
 export default (state = init_state, action) => {
   if (action.type == "ON_LOGIN_SUCCESS") {
-    return { ...state, username: action.payload };
-  } else if (action.type == "ON_LOGIN_FAILED") {
-    return { ...state, fullName: action.payload };
+    const { id, username, fullName, password, role } = action.payload;
+    return {
+      ...state,
+      id,
+      username,
+      fullName,
+      password,
+      role,
+      isLoggedIn: true
+    };
+  } else if (action.type == "ON_LOGIN_FAIL") {
+    return { ...state, errMsg: action.payload };
+  } else if (action.type == "ON_REGISTER_SUCCESS") {
+    const { id, username, fullName, password, role } = action.payload;
+    return {
+      ...state,
+      id,
+      username,
+      fullName,
+      password,
+      role,
+      isLoggedIn: true
+    };
+  } else if (action.type == "ON_LOGOUT_SUCCESS") {
+    return { ...init_state };
   }
   return { ...state };
 };
